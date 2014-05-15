@@ -3,13 +3,15 @@ package com.jdb.base.item;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class ItemSoulJar extends Item 
+public class ItemKnife extends Item 
 {
-	
-	public ItemSoulJar()
+
+	public ItemKnife()
 	{
 		this.setCreativeTab(CreativeTabs.tabMisc);
-		this.setTextureName("jar");
-		this.setUnlocalizedName("soulJar");
+		this.setMaxStackSize(1);
+		this.setTextureName("knife");
+		this.setUnlocalizedName("knife");
 	}
+	
 }

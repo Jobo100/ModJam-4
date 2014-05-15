@@ -3,13 +3,15 @@ package com.jdb.base.item;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class ItemSoulJar extends Item 
+public class ItemTotem extends Item 
 {
-	
-	public ItemSoulJar()
+
+	public ItemTotem()
 	{
+		this.setMaxStackSize(1);
 		this.setCreativeTab(CreativeTabs.tabMisc);
-		this.setTextureName("jar");
-		this.setUnlocalizedName("soulJar");
+		this.setTextureName("totem");
+		this.setUnlocalizedName("totem");
 	}
+	
 }
