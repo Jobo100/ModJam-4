@@ -13,4 +13,13 @@ public class ItemSoulJar extends Item
 		this.setTextureName("jar");
 		this.setUnlocalizedName("soulJar");
 	}
+	
+	public boolean hasSoul()
+	{
+		if(soulInside != null)
+		{
+			return true;
+		}
+		return false;
+	}
 }
