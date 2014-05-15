@@ -13,8 +13,8 @@ public class ModBlocks
 	
 	public void initBlocks()
 	{
-		charredWood = new BlockCharredWood();
-		charredWoodSlab = new BlockCharredWoodSlab(true, Material.wood);
-		ashPile = new BlockAshPile();
+		charredWood = new BlockCharredWood(Material.wood);
+		charredWoodSlab = new BlockCharredWoodSlab(false, Material.wood);
+		ashPile = new BlockAshPile(Material.sand);
 	}
 }
