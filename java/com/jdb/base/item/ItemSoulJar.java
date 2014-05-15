@@ -5,7 +5,7 @@ import net.minecraft.item.Item;
 
 public class ItemSoulJar extends Item 
 {
-	public String soulInside;
+	public int soulInside;
 	
 	public ItemSoulJar()
 	{
@@ -16,7 +16,7 @@ public class ItemSoulJar extends Item
 	
 	public boolean hasSoul()
 	{
-		if(soulInside != null)
+		if(soulInside != 0)
 		{
 			return true;
 		}
