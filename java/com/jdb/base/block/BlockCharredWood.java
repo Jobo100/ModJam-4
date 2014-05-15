@@ -1,5 +1,7 @@
 package com.jdb.base.block;
 
+import java.util.Random;
+
 import com.jdb.base.item.ItemKnife;
 import com.jdb.base.item.ItemSoulJar;
 
@@ -25,7 +27,6 @@ public class BlockCharredWood extends Block {
 		this.setBlockName("charredWood");
 		this.setHardness(2.0F);
 		this.setResistance(7.0F);
-		this.setTickRandomly(true);
 	}
 	
 	@Override
@@ -43,7 +44,7 @@ public class BlockCharredWood extends Block {
     	}
         return false;
     }
-    
+	
     public TileEntity createTileEntity(World world, int metadata)
     {
     	tileEntity = new TileEntityCharredWood();
