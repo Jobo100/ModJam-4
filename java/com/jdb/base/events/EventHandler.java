@@ -5,6 +5,7 @@ import java.util.Random;
 import com.jdb.base.item.ItemSoulJar;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -36,6 +37,15 @@ public class EventHandler
 					}
 				}
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onItemCrafted(ItemCraftedEvent event)
+	{
+		if(event.crafting.getItem() instanceof ItemSoulJar)
+		{
+			event.crafting.stackTagCompound.setInteger("Entity Id", -1);
 		}
 	}
 	
