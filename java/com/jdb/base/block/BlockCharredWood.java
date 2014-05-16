@@ -57,20 +57,25 @@ public class BlockCharredWood extends Block {
     	{
     		tileEntity.addToEscapeTime(60);
     		player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+    		return true;
     	}
     	if(player.inventory.getCurrentItem().getItem() instanceof ItemStickyIronCork && tileEntity.getEscapeTime() >= 7200)
     	{
     		tileEntity.setEscapeTime(-5);
     		player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+    		return true;
     	}
     	if(player.inventory.getCurrentItem().getItem() instanceof ItemKnife && tileEntity.getEscapeTime() == -100)
     	{
     		tileEntity.setClicks(tileEntity.getClicks() + 1);
     		if(tileEntity.getClicks() == 7)
     		{
-    			EntityItem item = new EntityItem(world, x, y, z, new ItemStack(BaseMod.items.totem, 1));
+    			ItemStack itemStack = new ItemStack(BaseMod.items.totem, 1);
+    			itemStack.stackTagCompound.setInteger("Entity Id", tileEntity.getEntityId());
+    			EntityItem item = new EntityItem(world, x, y, z, itemStack);
     			world.spawnEntityInWorld(item);
     		}
+    		return true;
     	}
     	
     	return false;

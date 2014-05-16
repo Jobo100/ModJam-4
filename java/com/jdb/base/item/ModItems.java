@@ -1,5 +1,6 @@
 package com.jdb.base.item;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 
 public class ModItems 
@@ -20,5 +21,15 @@ public class ModItems
 		knife = new ItemKnife();
 		totem = new ItemTotem();
 		ash = new ItemAsh();
+	}
+	
+	public void registerItems()
+	{
+		GameRegistry.registerItem(soulJar, "soulJar");
+		GameRegistry.registerItem(ironCork, "ironCork");
+		GameRegistry.registerItem(stickyIronCork, "stickyIronCork");
+		GameRegistry.registerItem(knife, "knife");
+		GameRegistry.registerItem(totem, "totem");
+		GameRegistry.registerItem(ash, "ash");
 	}
 }

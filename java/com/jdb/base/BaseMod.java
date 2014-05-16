@@ -24,7 +24,9 @@ public class BaseMod
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		blocks.initBlocks();
+		blocks.registerBlocks();
 		items.initItems();
+		items.registerItems();
 	}
 	
 	@EventHandler
