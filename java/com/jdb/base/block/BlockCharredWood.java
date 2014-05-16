@@ -80,4 +80,10 @@ public class BlockCharredWood extends Block {
     	
     	return false;
     }
+	
+    public TileEntity createTileEntity(World world, int metadata)
+    {
+    	tileEntity = new TileEntityCharredWood();
+    	return tileEntity;
+    }
 }
