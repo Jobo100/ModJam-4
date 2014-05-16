@@ -28,14 +28,18 @@ public class ModEventHandler
 			for(int i = 0; i < size; i++)
 			{
 				ItemStack itemStack = player.inventory.mainInventory[i];
-				if(itemStack.stackTagCompound == null)
+				if(itemStack.getItem() != null)
 				{
-					if(itemStack.getItem() instanceof ItemSoulJar)
+					System.out.println(itemStack.getItem());
+					if(itemStack.stackTagCompound == null)
 					{
-						//if(rand.nextInt(50) == 1)
-							itemStack.setTagCompound(new NBTTagCompound());
-							itemStack.stackTagCompound.setInteger("Entity Id", event.entityLiving.getEntityId());
-							return;
+						if(itemStack.getItem() instanceof ItemSoulJar)
+						{
+							//if(rand.nextInt(50) == 1)
+								itemStack.setTagCompound(new NBTTagCompound());
+								itemStack.stackTagCompound.setInteger("Entity Id", event.entityLiving.getEntityId());
+								return;
+						}
 					}
 				}
 			}
