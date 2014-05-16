@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 public class BlockCharredWood extends BlockContainer {
 
 	private TileEntityCharredWood tileEntity;
+	private Random rand = new Random();
 	
 	protected BlockCharredWood(Material material) 
 	{
@@ -38,6 +39,10 @@ public class BlockCharredWood extends BlockContainer {
 	@Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int what, float are, float these, float questionMark)
     {
+		if(player.inventory.getCurrentItem() == null || player.inventory.getCurrentItem().getItem() == null)
+		{
+			return false;
+		}
     	if(player.inventory.getCurrentItem().getItem() instanceof ItemKnife && !tileEntity.carved)
     	{
     		tileEntity.carved = true;
@@ -90,6 +95,10 @@ public class BlockCharredWood extends BlockContainer {
     			{
     				item.getEntityItem().setTagCompound((NBTTagCompound) itemStack.getTagCompound().copy());
     			}
+                float f3 = 0.05F;
+                item.motionX = (double)((float)this.rand.nextGaussian() * f3);
+                item.motionY = (double)((float)this.rand.nextGaussian() * f3 + 0.2F);
+                item.motionZ = (double)((float)this.rand.nextGaussian() * f3);
     			world.setBlockToAir(x, y, z);
     			world.spawnEntityInWorld(item);
     		}
