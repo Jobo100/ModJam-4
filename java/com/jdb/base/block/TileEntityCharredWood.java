@@ -8,6 +8,8 @@ public class TileEntityCharredWood extends TileEntity
 		private int entityId = 0;	
 		private int time = 0;
 		private int timeToEscape = 1200;
+		private int clicks = 0;
+		public boolean carved = false;
 		
 		public void writeToNBT(NBTTagCompound nbtCompound)
 	    {
@@ -15,6 +17,8 @@ public class TileEntityCharredWood extends TileEntity
 	        nbtCompound.setInteger("Entity Id", entityId);
 	        nbtCompound.setInteger("Time", time);
 	        nbtCompound.setInteger("Time To Escape", timeToEscape);
+	        nbtCompound.setInteger("Clicks", clicks);
+	        nbtCompound.setBoolean("Carved", carved);
 	    }
 
 	    public void readFromNBT(NBTTagCompound nbtCompound)
@@ -23,6 +27,18 @@ public class TileEntityCharredWood extends TileEntity
 	        entityId = nbtCompound.getInteger("Entity ID");
 	        time = nbtCompound.getInteger("Time");
 	        timeToEscape = nbtCompound.getInteger("Time To Escape");
+	        clicks = nbtCompound.getInteger("Clicks");
+	        carved = nbtCompound.getBoolean("Carved");
+	    }
+	    
+	    public void setClicks(int clicks)
+	    {
+	    	this.clicks = clicks;
+	    }
+	    
+	    public int getClicks()
+	    {
+	    	return clicks;
 	    }
 	    
 	    public void setEntityId(int id)
@@ -37,12 +53,18 @@ public class TileEntityCharredWood extends TileEntity
 	    
 	    public void addToEscapeTime(int increase)
 	    {
-	    	timeToEscape += increase;
+	    	increase *= 20;
+	    	int time2 = timeToEscape + increase;
+	    	if(time2 > 9600)
+	    		time2 = 9600;
+	    	timeToEscape = time2;
 	    }
 	    
 	    public void setEscapeTime(int seconds)
 	    {
 	    	int time2 = seconds * 20;
+	    	if(time2 > 9600)
+	    		time2 = 9600;
 	    	timeToEscape = time2;
 	    }
 	    
@@ -53,10 +75,10 @@ public class TileEntityCharredWood extends TileEntity
 	    
 	    public void updateEntity() 
 	    {
-	    	if(getEntityId() != 0)
+	    	if(getEntityId() != 0 && timeToEscape != -100)
 	    	{
 	    		time++;
-	    		if(time >= timeToEscape)
+	    		if(time >= timeToEscape )
 	    		{
 	    			setEntityId(0);
 	    		}

@@ -2,14 +2,17 @@ package com.jdb.base.block;
 
 import java.util.Random;
 
+import com.jdb.base.BaseMod;
 import com.jdb.base.item.ItemAsh;
 import com.jdb.base.item.ItemKnife;
 import com.jdb.base.item.ItemSoulJar;
+import com.jdb.base.item.ItemStickyIronCork;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -17,7 +20,6 @@ import net.minecraft.world.World;
 
 public class BlockCharredWood extends Block {
 
-	public boolean carved = false;
 	private TileEntityCharredWood tileEntity;
 	
 	protected BlockCharredWood(Material material) 
@@ -36,10 +38,10 @@ public class BlockCharredWood extends Block {
     {
     	if(player.inventory.getCurrentItem().getItem() instanceof ItemKnife)
     	{
-    		carved = true;
+    		tileEntity.carved = true;
     		return true;
     	}
-    	if(player.inventory.getCurrentItem().getItem() instanceof ItemSoulJar && player.inventory.getCurrentItem().stackTagCompound.getInteger("Entity Id") != 0 && carved)
+    	if(player.inventory.getCurrentItem().getItem() instanceof ItemSoulJar && player.inventory.getCurrentItem().stackTagCompound.getInteger("Entity Id") != 0 && tileEntity.carved)
     	{
     		tileEntity.setEntityId(player.inventory.getCurrentItem().stackTagCompound.getInteger("Entity Id"));
     		player.inventory.getCurrentItem().stackTagCompound.setInteger("Entity Id", 0);
@@ -53,9 +55,24 @@ public class BlockCharredWood extends Block {
     	}
     	if(player.inventory.getCurrentItem().getItem() instanceof ItemAsh && player.inventory.getCurrentItem().stackSize == 2 && tileEntity.getEntityId() != 0)
     	{
-    		player.inventory.getCurrentItem().
+    		tileEntity.addToEscapeTime(60);
+    		player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
     	}
-    	if(player.inventory.getCurrentItem().getItem() instanceof ItemStickyIronCork &&)
+    	if(player.inventory.getCurrentItem().getItem() instanceof ItemStickyIronCork && tileEntity.getEscapeTime() >= 7200)
+    	{
+    		tileEntity.setEscapeTime(-5);
+    		player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+    	}
+    	if(player.inventory.getCurrentItem().getItem() instanceof ItemKnife && tileEntity.getEscapeTime() == -100)
+    	{
+    		tileEntity.setClicks(tileEntity.getClicks() + 1);
+    		if(tileEntity.getClicks() == 7)
+    		{
+    			EntityItem item = new EntityItem(world, x, y, z, new ItemStack(BaseMod.items.totem, 1));
+    			world.spawnEntityInWorld(item);
+    		}
+    	}
+    	
     	return false;
     }
 }
