@@ -2,6 +2,7 @@ package com.jdb.base.block;
 
 import java.util.Random;
 
+import com.jdb.base.item.ItemAsh;
 import com.jdb.base.item.ItemKnife;
 import com.jdb.base.item.ItemSoulJar;
 
@@ -10,6 +11,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -37,17 +39,23 @@ public class BlockCharredWood extends Block {
     		carved = true;
     		return true;
     	}
-    	if(player.inventory.getCurrentItem().getItem() instanceof ItemSoulJar && player.inventory.getCurrentItem().stackTagCompound.getInteger("Entity Id") != 0)
+    	if(player.inventory.getCurrentItem().getItem() instanceof ItemSoulJar && player.inventory.getCurrentItem().stackTagCompound.getInteger("Entity Id") != 0 && carved)
     	{
     		tileEntity.setEntityId(player.inventory.getCurrentItem().stackTagCompound.getInteger("Entity Id"));
+    		player.inventory.getCurrentItem().stackTagCompound.setInteger("Entity Id", 0);
     		return true;
     	}
-        return false;
-    }
-	
-    public TileEntity createTileEntity(World world, int metadata)
-    {
-    	tileEntity = new TileEntityCharredWood();
-    	return tileEntity;
+    	if(player.inventory.getCurrentItem().getItem() instanceof ItemAsh && player.inventory.getCurrentItem().stackSize > 2 && tileEntity.getEntityId() != 0)
+    	{
+    		tileEntity.addToEscapeTime(60);
+    		player.inventory.getCurrentItem().stackSize -= 2;
+    		return true;
+    	}
+    	if(player.inventory.getCurrentItem().getItem() instanceof ItemAsh && player.inventory.getCurrentItem().stackSize == 2 && tileEntity.getEntityId() != 0)
+    	{
+    		player.inventory.getCurrentItem().
+    	}
+    	if(player.inventory.getCurrentItem().getItem() instanceof ItemStickyIronCork &&)
+    	return false;
     }
 }
