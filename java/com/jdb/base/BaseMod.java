@@ -1,6 +1,9 @@
 package com.jdb.base;
 
+import net.minecraftforge.common.MinecraftForge;
+
 import com.jdb.base.block.ModBlocks;
+import com.jdb.base.events.ModEventHandler;
 import com.jdb.base.item.ModItems;
 
 import cpw.mods.fml.common.Mod;
@@ -38,6 +41,6 @@ public class BaseMod
 	@EventHandler
 	public void PostInit(FMLPostInitializationEvent event)
 	{
-		
+		MinecraftForge.EVENT_BUS.register(new ModEventHandler());
 	}
 }

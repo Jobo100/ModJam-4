@@ -11,5 +11,6 @@ public class ItemSoulJar extends Item
 		this.setCreativeTab(CreativeTabs.tabMisc);
 		this.setTextureName("jar");
 		this.setUnlocalizedName("soulJar");
+		this.setMaxStackSize(1);
 	}
 }

@@ -44,13 +44,16 @@ public class BlockCharredWood extends BlockContainer {
     	}
     	if(player.inventory.getCurrentItem().getItem() instanceof ItemSoulJar)
     	{
-    		if(player.inventory.getCurrentItem().stackTagCompound.getInteger("Entity Id") != -1)
+    		if(player.inventory.getCurrentItem().stackTagCompound != null)
     		{
-    			if(tileEntity.carved)
+    			if(player.inventory.getCurrentItem().stackTagCompound.getInteger("Entity Id") != 0)
     			{
-    				tileEntity.setEntityId(player.inventory.getCurrentItem().stackTagCompound.getInteger("Entity Id"));
-    				player.inventory.getCurrentItem().stackTagCompound.setInteger("Entity Id", 0);
-    				return true;
+    				if(tileEntity.carved)
+    				{
+    					tileEntity.setEntityId(player.inventory.getCurrentItem().stackTagCompound.getInteger("Entity Id"));
+    					player.inventory.getCurrentItem().stackTagCompound.setInteger("Entity Id", 0);
+    					return true;
+    				}
     			}
     		}
     	}
