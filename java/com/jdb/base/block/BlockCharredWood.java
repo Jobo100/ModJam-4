@@ -9,6 +9,7 @@ import com.jdb.base.item.ItemSoulJar;
 import com.jdb.base.item.ItemStickyIronCork;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,7 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockCharredWood extends Block {
+public class BlockCharredWood extends BlockContainer {
 
 	private TileEntityCharredWood tileEntity;
 	
@@ -80,10 +81,11 @@ public class BlockCharredWood extends Block {
     	
     	return false;
     }
-	
-    public TileEntity createTileEntity(World world, int metadata)
-    {
-    	tileEntity = new TileEntityCharredWood();
-    	return tileEntity;
-    }
+
+	@Override
+	public TileEntity createNewTileEntity(World var1, int var2)
+	{
+		tileEntity = new TileEntityCharredWood();
+		return tileEntity;
+	}
 }

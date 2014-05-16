@@ -13,22 +13,22 @@ public class TileEntityCharredWood extends TileEntity
 		
 		public void writeToNBT(NBTTagCompound nbtCompound)
 	    {
-	        super.writeToNBT(nbtCompound);
 	        nbtCompound.setInteger("Entity Id", entityId);
 	        nbtCompound.setInteger("Time", time);
 	        nbtCompound.setInteger("Time To Escape", timeToEscape);
 	        nbtCompound.setInteger("Clicks", clicks);
 	        nbtCompound.setBoolean("Carved", carved);
+	        super.writeToNBT(nbtCompound);
 	    }
 
 	    public void readFromNBT(NBTTagCompound nbtCompound)
 	    {
-	        super.readFromNBT(nbtCompound);
 	        entityId = nbtCompound.getInteger("Entity ID");
 	        time = nbtCompound.getInteger("Time");
 	        timeToEscape = nbtCompound.getInteger("Time To Escape");
 	        clicks = nbtCompound.getInteger("Clicks");
 	        carved = nbtCompound.getBoolean("Carved");
+	        super.readFromNBT(nbtCompound);
 	    }
 	    
 	    public void setClicks(int clicks)
