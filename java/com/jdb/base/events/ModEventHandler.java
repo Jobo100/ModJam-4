@@ -28,7 +28,7 @@ public class ModEventHandler
 			for(int i = 0; i < size; i++)
 			{
 				ItemStack itemStack = player.inventory.mainInventory[i];
-				if(itemStack.getItem() != null)
+				if(itemStack != null)
 				{
 					System.out.println(itemStack.getItem());
 					if(itemStack.stackTagCompound == null)

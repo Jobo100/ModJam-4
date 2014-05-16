@@ -6,15 +6,13 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityCharredWood extends TileEntity
 {
 		private int entityId = 0;	
-		private int time = 0;
-		private int timeToEscape = 1200;
+		private int timeToEscape = 0;
 		private int clicks = 0;
 		public boolean carved = false;
 		
 		public void writeToNBT(NBTTagCompound nbtCompound)
 	    {
 	        nbtCompound.setInteger("Entity Id", entityId);
-	        nbtCompound.setInteger("Time", time);
 	        nbtCompound.setInteger("Time To Escape", timeToEscape);
 	        nbtCompound.setInteger("Clicks", clicks);
 	        nbtCompound.setBoolean("Carved", carved);
@@ -24,7 +22,6 @@ public class TileEntityCharredWood extends TileEntity
 	    public void readFromNBT(NBTTagCompound nbtCompound)
 	    {
 	        entityId = nbtCompound.getInteger("Entity ID");
-	        time = nbtCompound.getInteger("Time");
 	        timeToEscape = nbtCompound.getInteger("Time To Escape");
 	        clicks = nbtCompound.getInteger("Clicks");
 	        carved = nbtCompound.getBoolean("Carved");
@@ -77,8 +74,8 @@ public class TileEntityCharredWood extends TileEntity
 	    {
 	    	if(getEntityId() != 0 && timeToEscape != -100)
 	    	{
-	    		time++;
-	    		if(time >= timeToEscape )
+	    		timeToEscape--;
+	    		if(timeToEscape <= 0 && timeToEscape > -2)
 	    		{
 	    			setEntityId(0);
 	    		}

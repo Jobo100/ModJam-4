@@ -16,6 +16,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -37,7 +38,7 @@ public class BlockCharredWood extends BlockContainer {
 	@Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int what, float are, float these, float questionMark)
     {
-    	if(player.inventory.getCurrentItem().getItem() instanceof ItemKnife)
+    	if(player.inventory.getCurrentItem().getItem() instanceof ItemKnife && !tileEntity.carved)
     	{
     		tileEntity.carved = true;
     		return true;
@@ -57,13 +58,13 @@ public class BlockCharredWood extends BlockContainer {
     			}
     		}
     	}
-    	if(player.inventory.getCurrentItem().getItem() instanceof ItemAsh && player.inventory.getCurrentItem().stackSize > 2 && tileEntity.getEntityId() != 0)
+    	if(player.inventory.getCurrentItem().getItem() instanceof ItemAsh && player.inventory.getCurrentItem().stackSize > 2 && tileEntity.getEntityId() != 0 && tileEntity.getEscapeTime() != 9600 && tileEntity.getEscapeTime() != -100)
     	{
     		tileEntity.addToEscapeTime(60);
     		player.inventory.getCurrentItem().stackSize -= 2;
     		return true;
     	}
-    	if(player.inventory.getCurrentItem().getItem() instanceof ItemAsh && player.inventory.getCurrentItem().stackSize == 2 && tileEntity.getEntityId() != 0)
+    	if(player.inventory.getCurrentItem().getItem() instanceof ItemAsh && player.inventory.getCurrentItem().stackSize == 2 && tileEntity.getEntityId() != 0 && tileEntity.getEscapeTime() != 9600 && tileEntity.getEscapeTime() != -100)
     	{
     		tileEntity.addToEscapeTime(60);
     		player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
@@ -80,7 +81,9 @@ public class BlockCharredWood extends BlockContainer {
     		tileEntity.setClicks(tileEntity.getClicks() + 1);
     		if(tileEntity.getClicks() == 7)
     		{
+    			System.out.println("7 clicks");
     			ItemStack itemStack = new ItemStack(BaseMod.items.totem, 1);
+    			itemStack.setTagCompound(new NBTTagCompound());
     			itemStack.stackTagCompound.setInteger("Entity Id", tileEntity.getEntityId());
     			EntityItem item = new EntityItem(world, x, y, z, itemStack);
     			world.spawnEntityInWorld(item);
