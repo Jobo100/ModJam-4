@@ -81,11 +81,16 @@ public class BlockCharredWood extends BlockContainer {
     		tileEntity.setClicks(tileEntity.getClicks() + 1);
     		if(tileEntity.getClicks() == 7)
     		{
-    			System.out.println("7 clicks");
+    			
     			ItemStack itemStack = new ItemStack(BaseMod.items.totem, 1);
     			itemStack.setTagCompound(new NBTTagCompound());
     			itemStack.stackTagCompound.setInteger("Entity Id", tileEntity.getEntityId());
-    			EntityItem item = new EntityItem(world, x, y, z, itemStack);
+    			EntityItem item = new EntityItem(world, x, y + 1.2F, z, itemStack);
+    			if(itemStack.hasTagCompound())
+    			{
+    				item.getEntityItem().setTagCompound((NBTTagCompound) itemStack.getTagCompound().copy());
+    			}
+    			world.setBlockToAir(x, y, z);
     			world.spawnEntityInWorld(item);
     		}
     		return true;
